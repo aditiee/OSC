@@ -1,0 +1,152 @@
+Q1. Explore the following commands with various options, refer man pages for 
+    further help 
+a) date 
+
+%D: Display date as mm/dd/yy.    2020   
+%d: Display the day of the month (01 to 31). 07       
+%a: Displays the abbreviated name for weekdays (Sun to Sat).Mon
+%A: Displays full weekdays (Sunday to Saturday). Monday
+%h: Displays abbreviated month name (Jan to Dec). Sep
+%b: Displays abbreviated month name (Jan to Dec). Sep
+%B: Displays full month name(January to December).September
+%m: Displays the month of year (01 to 12). 09
+%y: Displays last two digits of the year(00 to 99). 20
+%Y: Display four-digit year. 2020
+%T: Display the time in 24 hour format as HH:MM:SS.21:50:41
+%H: Display the hour. 21
+%M: Display the minute.50
+%S: Display the seconds.41
+
+date --date="next mon"	Mon Sep 14 00:00:00 IST 2020
+date --date="next year" Tue Sep  7 21:45:07 IST 2021
+date --date="2 year"  Wed Sep  7 21:45:20 IST 2022
+date -u Mon Sep  7 16:26:15 UTC 2020
+date --date="2020/09/07" Mon Sep  7 00:00:00 IST 2020
+
+b) cal 
+cal 2020
+cal -m12 2020
+cal sept 2020
+ncal
+
+c) bc 
+bc (Basic Calculator) is a command line utility that offers everything you expect from a simple scientific or financial calculator
+
+d) echo 
+echo command in linux is used to display line of text/string that are passed as an argument . 
+
+e) who
+The standard Unix command who displays a list of users who are currently logged into the computer.
+
+f) whoami 
+whoami - This command reveals who is currently logged in.
+
+g) logname
+In computer software, logname (stands for Login Name) is a program in Unix and Unix-like operating systems that prints the name of the user who is currently logged in on the terminal.
+
+g) uname 
+ uname -a -a option: It prints all the system information in the following order:
+ Kernel name, network node hostname, kernel release date, kernel version, machine hardware name, hardware platform, operating system
+uname -s : It prints the kernel name
+uname -n : It prints the hostname of the network node(current computer).
+uname -r:  It prints the kernel release date.
+uname -v option: It prints the version of the current kernel.
+uname  -m option: It prints the machine hardware name.
+uname -p option: It prints the type of the processor.
+uname -o option: It prints the name of the operating system.
+
+h)seq 
+seq command in Linux is used to generate numbers from FIRST to LAST in steps of INCREMENT. 
+for eg: 
+seq 10
+seq 3 9
+seq 5 5 50
+
+
+i) clear
+clear is a standard Unix computer operating system command that is used to clear the terminal screen
+
+
+Q2.	A) Create three directory a b and c and create a.txt,b.txt and c.txt
+		in each directory respectively and then copy c directory into the a.
+	B)Move Directory b to c.
+	C)Create alias of ls -lh command to your name.
+	D)Change Directory name a to cdac.
+
+Q3. A) Create five files file1.txt , file2.txt ,file3.txt file4.txt and
+    file5.txt with some text inside it. Search for 's' character
+    inside all the files using grep command.
+    Also Use cat to view all file content together.
+	B)Create file.txt using cat and edit that using nano editor.
+	c)Create 5 empty files using touch command
+	D)Remove previously created directory a , b and c.
+
+Q4. Create a file with some content using vi editor
+	a) Display the file using cat command
+	b) Display line numbers along with content
+	c) Display the file in reverse order using tac
+	d) Combine multiple files using cat command
+
+Q5. Create Random some files and sub directories.
+	a) display files row wise, column wise, 1 per row
+	b) sort the files in ascending, descending order
+	c) Create some hidden files and sub directories and display them using “ls -a”
+	d) Change time stamp of some files and directories using touch command and display the files using ls -t ls -rt
+	e) Recursive display contents of your home directory.
+	f) display all attributes of files and directories using ls -l
+	g) display attributes of a directory using ls -ld
+
+==================================================================================
+Q1. Create directory of your name and then create 4 files inside it named
+	a.txt, b.txt, c.txt and d.sh. And change the directory permission to
+	only user and also files permission to only user such that
+		a)user can read and write the file a.txt and b.txt
+		b)user can write the file c.txt
+		c)user can exectuable the file d.sh. Make
+			Contents of file d.sh:
+			#/bin/sh
+			ls -lh
+Q2. Change the permission of the previous directory to executable only.
+	Analyze the output.
+Q3. Change the permission of the previous directory to read only.
+	Analyze the output.
+Q4. Use echo to list the all files of your home directory.
+Q5. Use echo to list the all files of /etc/ directory
+Q6. Use echo to list the all files of /etc/ directory with extension name .conf
+Q7. Use echo to append your name to a.txt
+
+==================================================================================
+
+Note:Many operation might not work.Analyze them
+1.	Create Three level nested directory a,b and c
+a)Create at least one hidden file in each directory
+b)Create at least one normal text file in each directory
+c)Copy c into a
+d)Copy file inside a into b
+
+2.	Change the third level directory c permission to read only
+3.	Try copying third level c directory to outside of a
+4.	Create the directory  “data“ inside b
+5.	Change the permission of b to read and write only
+6.	Create directory “data2”  inside b
+7.	Create data.txt file inside b
+8.	Rename the second level directory c to copied_dir
+9.	Change permission of copied_dir to only executable
+10.	Try ls on copied_dir
+11.	Try moving copied_dir to outside of a
+12.	Try moving data directory outside of a
+13.	Now change the owner of the directory a to root
+14.	Change permission of a to read write and executable to only user
+15.	Try creating directory sample inside a
+16.	Create directory x outside a
+17.	Try moving x inside a
+18.	Create directory movies
+19.	Change group of movies to sudo
+20.	Change group of movies to avahi
+21.	Try changing permission after changing ownership to root
+22.	Try Changing permission after changing group to sudo without sudo
+23.	Try Changing owner and group both to root
+24.	Try changinging permission
+25.	Try deleting the file
+
+	

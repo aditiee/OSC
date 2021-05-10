@@ -1,0 +1,109 @@
+CDAC KHARGHAR
+NAME : ADITI GUDADHE
+ROLL NO : 200240320004
+PLATFORM : Ubuntu Application
+
+
+
+QuesNo1:
+echo "ENTER THE NUMBER :"
+read n                                                                                                                                                                  function Armstrong
+{
+        t=$n
+        s=0
+        b=0
+        c=10
+        while [ $n -gt $b ]
+        do
+                r=$(( n % c))
+                i=$((r*r*r))
+                s=$((s+i))
+                n=$((n / c))
+        done
+        echo $s
+        if [ $s == $t ]
+        then
+                echo "$t IS AN ARMSTRONG NUMBER"
+        else
+                echo "$t IS NOT AN ARMSTRONG NUMBER"                                                                                                                            fi
+}
+result=`Armstrong $n`
+echo "$result"
+
+OUTPUT:
+aditi@DESKTOP-0ACHSLG:~$ bash QuesNo1.sh
+ENTER THE NUMBER :
+153
+153
+153 IS AN ARMSTRONG NUMBER
+aditi@DESKTOP-0ACHSLG:~$ bash QuesNo1.sh
+ENTER THE NUMBER :
+111
+3
+111 IS NOT AN ARMSTRING NUMBER
+
+---------------------------------------------------------------
+QuesNO2:
+read -p "ENTER FIRST NUMBER :" num1
+read -p "ENTER SECOND NUMBER :" num2
+read -p "ENTER THIRD NUMBER :" num3
+if [ $num1 -gt $num2 ]  && [ $num1 -gt $num3 ];  then
+        echo "$num1 is LARGEST among all"
+elif [ $num2 -gt $num1 ]  && [ $num2 -gt $num3 ]; then
+        echo "$num2 is LARGEST among all"
+elif [ $num3 -gt $num1 ] && [ $num3 -gt $num2 ]; then
+        echo "$num3 is LARGEST among all"
+else
+        echo "ALL THREE ARE SAME"
+fi
+
+OUTPUT:
+aditi@DESKTOP-0ACHSLG:~$ bash QuesNo2.sh
+ENTER FIRST NUMBER :9
+ENTER SECOND NUMBER :6
+ENTER THIRD NUMBER :3
+9 is LARGEST among all
+
+-----------------------------------------------------------------
+
+QuesNo3:
+read -p "ENTER THE NUMBER : " num
+fact=1
+for((i=1;i<=num;i++))
+do
+        fact=$(expr $fact \* $i)
+done
+echo "FACTORIAL OF $num : $fact"
+~  
+OUTPUT:
+aditi@DESKTOP-0ACHSLG:~$ bash QuesNo3.sh
+ENTER THE NUMBER : 4
+FACTORIAL OF 4 : 24  
+  
+------------------------------------------------------------------
+
+QuesNo4:
+
+echo -n "ENTER THE TOTAL NUMBERS :"
+read n
+echo "ENTER ARRAY ELEMENTS:"
+i=0
+sum=0
+while [ $i -lt $n ]
+do
+        read a[$i]
+        i=`expr $i + 1`
+done
+echo "SUM OF ALL ELEMENTS :"
+for i in ${a[@]}
+do
+         sum=`expr $sum + $i`
+done
+echo "THE NUMBER OF ELEMENTS IN THE ARRAY ARE $n"
+echo "THE SUM OF ALL ELEMENTS : $sum"
+echo "ARRAY ELEMENTS ARE : "
+for i in ${a[@]}
+do
+        echo $i
+done
+                  

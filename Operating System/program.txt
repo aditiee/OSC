@@ -1,0 +1,444 @@
+
+edit
+play_arrow
+
+brightness_4
+// C++ program for implementation of FCFS  
+// scheduling 
+#include<iostream> 
+using namespace std; 
+  
+// Function to find the waiting time for all  
+// processes 
+void findWaitingTime(int processes[], int n,  
+                          int bt[], int wt[]) 
+{ 
+    // waiting time for first process is 0 
+    wt[0] = 0; 
+  
+    // calculating waiting time 
+    for (int  i = 1; i < n ; i++ ) 
+        wt[i] =  bt[i-1] + wt[i-1] ; 
+} 
+  
+// Function to calculate turn around time 
+void findTurnAroundTime( int processes[], int n,  
+                  int bt[], int wt[], int tat[]) 
+{ 
+    // calculating turnaround time by adding 
+    // bt[i] + wt[i] 
+    for (int  i = 0; i < n ; i++) 
+        tat[i] = bt[i] + wt[i]; 
+} 
+  
+//Function to calculate average time 
+void findavgTime( int processes[], int n, int bt[]) 
+{ 
+    int wt[n], tat[n], total_wt = 0, total_tat = 0; 
+  
+    //Function to find waiting time of all processes 
+    findWaitingTime(processes, n, bt, wt); 
+  
+    //Function to find turn around time for all processes 
+    findTurnAroundTime(processes, n, bt, wt, tat); 
+  
+    //Display processes along with all details 
+    cout << "Processes  "<< " Burst time  "
+         << " Waiting time  " << " Turn around time\n"; 
+  
+    // Calculate total waiting time and total turn  
+    // around time 
+    for (int  i=0; i<n; i++) 
+    { 
+        total_wt = total_wt + wt[i]; 
+        total_tat = total_tat + tat[i]; 
+        cout << "   " << i+1 << "\t\t" << bt[i] <<"\t    "
+            << wt[i] <<"\t\t  " << tat[i] <<endl; 
+    } 
+  
+    cout << "Average waiting time = " 
+         << (float)total_wt / (float)n; 
+    cout << "\nAverage turn around time = " 
+         << (float)total_tat / (float)n; 
+} 
+  
+// Driver code 
+int main() 
+{ 
+    //process id's 
+    int processes[] = { 1, 2, 3}; 
+    int n = sizeof processes / sizeof processes[0]; 
+  
+    //Burst time of all processes 
+    int  burst_time[] = {10, 5, 8}; 
+  
+    findavgTime(processes, n,  burst_time); 
+    return 0; 
+} 
+
+*********************************************************************
+
+edit
+play_arrow
+
+brightness_4
+// C++ program for implementation of FCFS 
+// scheduling with different arrival time 
+#include<iostream> 
+using namespace std; 
+  
+// Function to find the waiting time for all 
+// processes 
+void findWaitingTime(int processes[], int n, int bt[], 
+                                   int wt[], int at[]) 
+{ 
+    int service_time[n]; 
+    service_time[0] = 0; 
+    wt[0] = 0; 
+  
+    // calculating waiting time 
+    for (int i = 1; i < n ; i++) 
+    { 
+        // Add burst time of previous processes 
+        service_time[i] = service_time[i-1] + bt[i-1]; 
+  
+        // Find waiting time for current process = 
+        // sum - at[i] 
+        wt[i] = service_time[i] - at[i]; 
+  
+        // If waiting time for a process is in negative 
+        // that means it is already in the ready queue 
+        // before CPU becomes idle so its waiting time is 0 
+        if (wt[i] < 0) 
+            wt[i] = 0; 
+    } 
+} 
+  
+// Function to calculate turn around time 
+void findTurnAroundTime(int processes[], int n, int bt[], 
+                                      int wt[], int tat[]) 
+{ 
+    // Calculating turnaround time by adding bt[i] + wt[i] 
+    for (int i = 0; i < n ; i++) 
+        tat[i] = bt[i] + wt[i]; 
+} 
+  
+// Function to calculate average waiting and turn-around 
+// times. 
+void findavgTime(int processes[], int n, int bt[], int at[]) 
+{ 
+    int wt[n], tat[n]; 
+  
+    // Function to find waiting time of all processes 
+    findWaitingTime(processes, n, bt, wt, at); 
+  
+    // Function to find turn around time for all processes 
+    findTurnAroundTime(processes, n, bt, wt, tat); 
+  
+    // Display processes along with all details 
+    cout << "Processes " << " Burst Time " << " Arrival Time "
+         << " Waiting Time " << " Turn-Around Time "
+         << " Completion Time \n"; 
+    int total_wt = 0, total_tat = 0; 
+    for (int i = 0 ; i < n ; i++) 
+    { 
+        total_wt = total_wt + wt[i]; 
+        total_tat = total_tat + tat[i]; 
+        int compl_time = tat[i] + at[i]; 
+        cout << " " << i+1 << "\t\t" << bt[i] << "\t\t"
+             << at[i] << "\t\t" << wt[i] << "\t\t "
+             << tat[i]  <<  "\t\t " << compl_time << endl; 
+    } 
+  
+    cout << "Average waiting time = "
+         << (float)total_wt / (float)n; 
+    cout << "\nAverage turn around time = "
+         << (float)total_tat / (float)n; 
+} 
+  
+// Driver code 
+int main() 
+{ 
+    // Process id's 
+    int processes[] = {1, 2, 3}; 
+    int n = sizeof processes / sizeof processes[0]; 
+  
+    // Burst time of all processes 
+    int burst_time[] = {5, 9, 6}; 
+  
+    // Arrival time of all processes 
+    int arrival_time[] = {0, 3, 6}; 
+  
+    findavgTime(processes, n, burst_time, arrival_time); 
+  
+    return 0; 
+} 
+
+Output:
+Processes  Burst Time  Arrival Time  Waiting Time  Turn-Around Time  Completion Time 
+ 1        5        0        0         5         5
+ 2        9        3        2         11         14
+ 3        6        6        8         14         20
+Average waiting time = 3.33333
+Average turn around time = 10.0
+_________________________________________________________________________________________
+// C++ program to implement Shortest Job first with Arrival Time 
+#include<iostream> 
+using namespace std; 
+int mat[10][6]; 
+  
+void swap(int *a, int *b) 
+{ 
+    int temp = *a; 
+    *a = *b; 
+    *b = temp; 
+} 
+  
+void arrangeArrival(int num, int mat[][6]) 
+{ 
+    for(int i=0; i<num; i++) 
+    { 
+        for(int j=0; j<num-i-1; j++) 
+        { 
+            if(mat[j][1] > mat[j+1][1]) 
+            { 
+                for(int k=0; k<5; k++) 
+                { 
+                    swap(mat[j][k], mat[j+1][k]); 
+                } 
+            } 
+        } 
+    } 
+} 
+  
+void completionTime(int num, int mat[][6]) 
+{ 
+    int temp, val; 
+    mat[0][3] = mat[0][1] + mat[0][2]; 
+    mat[0][5] = mat[0][3] - mat[0][1]; 
+    mat[0][4] = mat[0][5] - mat[0][2]; 
+      
+    for(int i=1; i<num; i++) 
+    { 
+        temp = mat[i-1][3]; 
+        int low = mat[i][2]; 
+        for(int j=i; j<num; j++) 
+        { 
+            if(temp >= mat[j][1] && low >= mat[j][2]) 
+            { 
+                low = mat[j][2]; 
+                val = j; 
+            } 
+        } 
+        mat[val][3] = temp + mat[val][2]; 
+        mat[val][5] = mat[val][3] - mat[val][1]; 
+        mat[val][4] = mat[val][5] - mat[val][2]; 
+        for(int k=0; k<6; k++) 
+        { 
+            swap(mat[val][k], mat[i][k]); 
+        } 
+    } 
+} 
+  
+int main() 
+{ 
+    int num, temp; 
+      
+    cout<<"Enter number of Process: "; 
+    cin>>num; 
+      
+    cout<<"...Enter the process ID...\n"; 
+    for(int i=0; i<num; i++) 
+    { 
+        cout<<"...Process "<<i+1<<"...\n"; 
+        cout<<"Enter Process Id: "; 
+        cin>>mat[i][0]; 
+        cout<<"Enter Arrival Time: "; 
+        cin>>mat[i][1]; 
+        cout<<"Enter Burst Time: "; 
+        cin>>mat[i][2]; 
+    } 
+      
+    cout<<"Before Arrange...\n"; 
+    cout<<"Process ID\tArrival Time\tBurst Time\n"; 
+    for(int i=0; i<num; i++) 
+    { 
+        cout<<mat[i][0]<<"\t\t"<<mat[i][1]<<"\t\t"<<mat[i][2]<<"\n"; 
+    } 
+      
+    arrangeArrival(num, mat); 
+    completionTime(num, mat); 
+    cout<<"Final Result...\n"; 
+    cout<<"Process ID\tArrival Time\tBurst Time\tWaiting Time\tTurnaround Time\n"; 
+    for(int i=0; i<num; i++) 
+    { 
+        cout<<mat[i][0]<<"\t\t"<<mat[i][1]<<"\t\t"<<mat[i][2]<<"\t\t"<<mat[i][4]<<"\t\t"<<mat[i][5]<<"\n"; 
+    } 
+} 
+Output:
+
+Process ID      Arrival Time    Burst Time
+1               2               3
+2               0               4
+3               4               2
+4               5               4
+Final Result...
+Process ID      Arrival Time    Burst Time      Waiting Time    Turnaround Time
+2               0               4               0               4
+3               4               2               0               2
+1               2               3               4               7
+
+
+
+
+
+
+
+
+// Shortest Remaining Time First (SRTF) 
+  
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+struct Process { 
+    int pid; // Process ID 
+    int bt; // Burst Time 
+    int art; // Arrival Time 
+}; 
+  
+// Function to find the waiting time for all 
+// processes 
+void findWaitingTime(Process proc[], int n, 
+                                int wt[]) 
+{ 
+    int rt[n]; 
+  
+    // Copy the burst time into rt[] 
+    for (int i = 0; i < n; i++) 
+        rt[i] = proc[i].bt; 
+  
+    int complete = 0, t = 0, minm = INT_MAX; 
+    int shortest = 0, finish_time; 
+    bool check = false; 
+  
+    // Process until all processes gets 
+    // completed 
+    while (complete != n) { 
+  
+        // Find process with minimum 
+        // remaining time among the 
+        // processes that arrives till the 
+        // current time` 
+        for (int j = 0; j < n; j++) { 
+            if ((proc[j].art <= t) && 
+            (rt[j] < minm) && rt[j] > 0) { 
+                minm = rt[j]; 
+                shortest = j; 
+                check = true; 
+            } 
+        } 
+  
+        if (check == false) { 
+            t++; 
+            continue; 
+        } 
+  
+        // Reduce remaining time by one 
+        rt[shortest]--; 
+  
+        // Update minimum 
+        minm = rt[shortest]; 
+        if (minm == 0) 
+            minm = INT_MAX; 
+  
+        // If a process gets completely 
+        // executed 
+        if (rt[shortest] == 0) { 
+  
+            // Increment complete 
+            complete++; 
+            check = false; 
+  
+            // Find finish time of current 
+            // process 
+            finish_time = t + 1; 
+  
+            // Calculate waiting time 
+            wt[shortest] = finish_time - 
+                        proc[shortest].bt - 
+                        proc[shortest].art; 
+  
+            if (wt[shortest] < 0) 
+                wt[shortest] = 0; 
+        } 
+        // Increment time 
+        t++; 
+    } 
+} 
+  
+// Function to calculate turn around time 
+void findTurnAroundTime(Process proc[], int n, 
+                        int wt[], int tat[]) 
+{ 
+    // calculating turnaround time by adding 
+    // bt[i] + wt[i] 
+    for (int i = 0; i < n; i++) 
+        tat[i] = proc[i].bt + wt[i]; 
+} 
+  
+// Function to calculate average time 
+void findavgTime(Process proc[], int n) 
+{ 
+    int wt[n], tat[n], total_wt = 0, 
+                    total_tat = 0; 
+  
+    // Function to find waiting time of all 
+    // processes 
+    findWaitingTime(proc, n, wt); 
+  
+    // Function to find turn around time for 
+    // all processes 
+    findTurnAroundTime(proc, n, wt, tat); 
+  
+    // Display processes along with all 
+    // details 
+    cout << "Processes "
+        << " Burst time "
+        << " Waiting time "
+        << " Turn around time\n"; 
+  
+    // Calculate total waiting time and 
+    // total turnaround time 
+    for (int i = 0; i < n; i++) { 
+        total_wt = total_wt + wt[i]; 
+        total_tat = total_tat + tat[i]; 
+        cout << " " << proc[i].pid << "\t\t"
+            << proc[i].bt << "\t\t " << wt[i] 
+            << "\t\t " << tat[i] << endl; 
+    } 
+  
+    cout << "\nAverage waiting time = "
+        << (float)total_wt / (float)n; 
+    cout << "\nAverage turn around time = "
+        << (float)total_tat / (float)n; 
+} 
+  
+// Driver code 
+int main() 
+{ 
+    Process proc[] = { { 1, 6, 1 }, { 2, 8, 1 }, 
+                    { 3, 7, 2 }, { 4, 3, 3 } }; 
+    int n = sizeof(proc) / sizeof(proc[0]); 
+  
+    findavgTime(proc, n); 
+    return 0; 
+} 
+
+Output:
+Processes  Burst time  Waiting time  Turn around time
+ 1        6         3        9
+ 2        8         16        24
+ 3        7         8        15
+ 4        3         0        3
+Average waiting time = 6.75
+Average turn around time = 12.75
